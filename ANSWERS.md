@@ -31,7 +31,6 @@ Re-rendering all rows on every filter change
 fix
 Debounce search input (300-500ms) using useDebouncedValue hook
 3) stale data after company switch
-
 Query key doesn't include companyId, so React Query uses cached data from previous tenant
 fix
 Include companyId in query key: ["employees", companyId, ...]

@@ -1,10 +1,9 @@
 import React from "react";
-import type { Employee, Permission } from "../types";
+import type { Employee } from "../types";
 import { usePermission } from "../context/auth";
 
 type Props = {
   rows: Employee[];
-  permissions: Permission[];
   search: string;
   onSearchChange: (v: string) => void;
   status: "ACTIVE" | "INACTIVE" | "ALL";
@@ -19,11 +18,7 @@ type Props = {
  * - no pagination/virtualization; will struggle with 1000+ rows
  */
 export function EmployeeTable(props: Props) {
-  const { rows, permissions, search, onSearchChange, status, onStatusChange } = props;
-
-  // Derived work (intentionally heavy-ish)
-  // const activeCount = rows.filter((e) => e.status === "ACTIVE").length;
-  // const inactiveCount = rows.filter((e) => e.status === "INACTIVE").length;
+  const { rows, search, onSearchChange, status, onStatusChange } = props;
 
   const canViewSalary = usePermission("EMPLOYEE_VIEW_SALARY");
 
@@ -87,13 +82,6 @@ export function EmployeeTable(props: Props) {
           </thead>
           <tbody>
             {rows.map((e) => (
-              // <tr key={e.id}>
-              //   <td>{e.name}</td>
-              //   <td>{e.email}</td>
-              //   <td>{e.department}</td>
-              //   {canViewSalary ? <td>{e.salary.toLocaleString()}</td> : null}
-              //   <td>{e.status}</td>
-              // </tr>
               <EmployeeRow key={e.id} employee={e} canViewSalary={canViewSalary} />
             ))}
           </tbody>

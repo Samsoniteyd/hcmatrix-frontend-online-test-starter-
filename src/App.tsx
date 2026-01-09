@@ -59,7 +59,6 @@ function Shell() {
       {data ? (
         <EmployeeTable
           rows={data}
-          permissions={permissions}
           search={search}
           onSearchChange={setSearch}
           status={status}
